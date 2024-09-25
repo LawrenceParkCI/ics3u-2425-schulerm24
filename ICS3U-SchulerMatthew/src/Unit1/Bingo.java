@@ -9,7 +9,7 @@ public class Bingo {
 	static int w = 20;
 	public static void main(String[] args) {
 	
-	
+	System.out.println("--------------------------------------------------------------------------------------------------------------------");
 	System.out.println("|     =========        |     ============     |     ==        ==     |      ==========      |      ==========      |");
 	System.out.println("|     ||       \\       |          ||          |     ||\\       ||     |     ||               |     ||        ||     |");
 	System.out.println("|     ||       ||      |          ||          |     || \\      ||     |     ||               |     ||        ||     |");
@@ -20,19 +20,18 @@ public class Bingo {
 	System.out.println("|     ||        ||     |          ||          |     ||      \\ ||     |     ||       ||      |     ||        ||     |");
 	System.out.println("|     ||        //     |          ||          |     ||       \\||     |     ||       ||      |     ||        ||     |");
 	System.out.println("|     ===========      |     ============     |     ==        ==     |      =========       |      ==========      |");
-	System.out.println("|     ~~~~~~~~~~~~     |     ~~~~~~~~~~~~     |     ~~~~~~~~~~~~     |     ~~~~~~~~~~~~     |     ~~~~~~~~~~~~     |");
 	System.out.println("|-------------------------------------------------------------------------------------------------------------------");
-	System.out.println("|     ============     |");
-	System.out.println("|        ");
-	System.out.println("|            ");
-	System.out.println("|           ");
-	System.out.println("|              ");
-	System.out.println("|             ");
-	System.out.println("|            ");
-	System.out.println("|           ");
-	System.out.println("|           ");
-	System.out.println("|          ");
-	System.out.println("|           ");
+	System.out.println("|     ==========     |");
+	System.out.println("|               ||     |");
+	System.out.println("|               ||     |");
+	System.out.println("|               ||     |");
+	System.out.println("|               ||     |");
+	System.out.println("|                      |");
+	System.out.println("|          ||          |");
+	System.out.println("|          ||          |");
+	System.out.println("|          ||          |");
+	System.out.println("|          ||          |");
+	System.out.println("|                      |");
 	System.out.println("|------------------------------------------------------------------------");
 	System.out.println("|");
 	System.out.println("|");
