@@ -21,10 +21,10 @@ public static void main(String[] args) {
 	
 		
 		System.out.println("");
-		System.out.println("******************************");
+		System.out.println("*****************************");
 		System.out.println(name);
 		System.out.println(ccinfo);
-		System.out.println("******************************");
+		System.out.println("*****************************");
 		sc.close();
 
 	}
