@@ -23,6 +23,7 @@ public class Akinator {
 			sc.close();
 	
 	
+
 	
 	
 	
