@@ -22,6 +22,7 @@ public class DFOutput {
 		
 		System.out.println("The cost of your item with tax is " + money.format(total));
 
+		
 		//Change the above print statement on line 19 to:
 		//System.out.println("The cost of your item with tax is " + money.format(total));
 		//Run the program again, how is the output different? Why?
