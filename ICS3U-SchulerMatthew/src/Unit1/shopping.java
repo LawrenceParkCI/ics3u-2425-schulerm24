@@ -22,8 +22,8 @@ public class shopping {
 		System.out.println();
 		
 		System.out.println(" Type how many ASPARAGUS you would like to buy, and press <Enter> ");
-		System.out.println();
 		AsparagusQuant = sc.nextDouble();
+		System.out.println();
 		
 		System.out.println("  Type how many AVOCADO you would like to buy, and press <Enter>  ");
 		AvocadoQuant = sc.nextDouble();
