@@ -67,7 +67,7 @@ public class shopping {
 	
 	sc.close();
 	System.out.println("--------------------------------");
-	System.out.println("   m   Veggies and Veyond       ");
+	System.out.println("       Veggies and Veyond       ");
 	System.out.println("--------------------------------");
 	System.out.println("--------------------------------");
 	System.out.println(item1 + " x" + item1quant + "\t\t$" + item1total);
