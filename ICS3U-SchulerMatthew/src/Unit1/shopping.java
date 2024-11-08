@@ -66,23 +66,23 @@ public class shopping {
 	double Total = (SubTotal + Tax);
 	
 	sc.close();
-	System.out.println("------------------------------");
-	System.out.println("      Veggies and Veyond      ");
-	System.out.println("------------------------------");
-	System.out.println("------------------------------");
+	System.out.println("--------------------------------");
+	System.out.println("   m   Veggies and Veyond       ");
+	System.out.println("--------------------------------");
+	System.out.println("--------------------------------");
 	System.out.println(item1 + " x" + item1quant + "\t\t$" + item1total);
 	System.out.println(item2 + " x" + item2quant + "\t\t$" + item2total);
 	System.out.println(item3 + " x" + item3quant + "\t\t$" + item3total);
 	System.out.println(item4 + " x" + item4quant + "\t\t$" + item4total);
 	System.out.println(item5 + " x" + item5quant + "\t\t$" + item5total);
-	System.out.println("------------------------------");
+	System.out.println("--------------------------------");
 	System.out.println("Subtotal\t\t$" + SubTotal);
 	System.out.println("Tax\t\t\t$" + Tax);
 	System.out.println("Total\t\t\t$" + Total);
-	System.out.println("------------------------------");
-	System.out.println("------------------------------");
-	System.out.println("          Thank You!          ");
-	System.out.println("------------------------------");
+	System.out.println("--------------------------------");
+	System.out.println("--------------------------------");
+	System.out.println("           Thank You!           ");
+	System.out.println("--------------------------------");
 	
 	}
 
