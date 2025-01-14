@@ -104,25 +104,25 @@ public class BlockDodger implements ActionListener, KeyListener, MouseListener{
     private void initAudioClips() {
         try {
             coinnoise = AudioSystem.getClip();
-            coinnoise.open(AudioSystem.getAudioInputStream(new File("src/adventuregame/Coin Noise_1Coin.wav")));
+            coinnoise.open(AudioSystem.getAudioInputStream(new File("src/culminating/Coin Noise_1Coin.wav")));
             bombdrop = AudioSystem.getClip();
-            bombdrop.open(AudioSystem.getAudioInputStream(new File("src/adventuregame/Audio 2bombdrop.wav")));
+            bombdrop.open(AudioSystem.getAudioInputStream(new File("src/culminating/Audio 2bombdrop.wav")));
             scorepowersong = AudioSystem.getClip();
-            scorepowersong.open(AudioSystem.getAudioInputStream(new File("src/adventuregame/score multiplierscore multiplier.wav")));
+            scorepowersong.open(AudioSystem.getAudioInputStream(new File("src/culminating/score multiplierscore multiplier.wav")));
             slomosong = AudioSystem.getClip();
-            slomosong.open(AudioSystem.getAudioInputStream(new File("src/adventuregame/slowchinamusicslowpowerup2.wav")));
+            slomosong.open(AudioSystem.getAudioInputStream(new File("src/culminating/slowchinamusicslowpowerup2.wav")));
             bombexplode = AudioSystem.getClip();
-            bombexplode.open(AudioSystem.getAudioInputStream(new File("src/adventuregame/explosionsfx_1.wav")));
+            bombexplode.open(AudioSystem.getAudioInputStream(new File("src/culminating/explosionsfx_1.wav")));
             powerupsong2 = AudioSystem.getClip();
-            powerupsong2.open(AudioSystem.getAudioInputStream(new File("src/adventuregame/Second powerup song_1.wav")));
+            powerupsong2.open(AudioSystem.getAudioInputStream(new File("src/culminating/Second powerup song_1.wav")));
             intro = AudioSystem.getClip();
-            intro.open(AudioSystem.getAudioInputStream(new File("src/adventuregame/block dodger soundtrack updatedblockdodgersplaysong.wav")));
+            intro.open(AudioSystem.getAudioInputStream(new File("src/culminating/block dodger soundtrack updatedblockdodgersplaysong.wav")));
             smallblocksong = AudioSystem.getClip();
-            smallblocksong.open(AudioSystem.getAudioInputStream(new File("src/adventuregame/smallblocksongsmallblocksong.wav")));
+            smallblocksong.open(AudioSystem.getAudioInputStream(new File("src/culminating/smallblocksongsmallblocksong.wav")));
             theme = AudioSystem.getClip();
-            theme.open(AudioSystem.getAudioInputStream(new File("src/adventuregame/block dodger soundtrack updatedblockdodgerintro.wav")));
+            theme.open(AudioSystem.getAudioInputStream(new File("src/culminating/block dodger soundtrack updatedblockdodgerintro.wav")));
             death = AudioSystem.getClip();
-            death.open(AudioSystem.getAudioInputStream(new File("src/adventuregame/Zone FX 2 - Interchangeblock explode1.wav")));
+            death.open(AudioSystem.getAudioInputStream(new File("src/culminating/Zone FX 2 - Interchangeblock explode1.wav")));
         } catch (Exception e) {
             e.printStackTrace();
         }
