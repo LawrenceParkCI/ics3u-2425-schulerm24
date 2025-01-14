@@ -9,8 +9,10 @@ public class HelloWorld {
 	
 	public static void main(String[] args) {
 	// This prints hello to the system console
-	System.out.println("Matthew Schuler");
-	System.out.println("My name is Hello World");
+	System.out.println("s1");
+	System.out.print("s2");
+	System.out.println("s3");
+	System.out.println("s4");
 	
 	}
 }	
