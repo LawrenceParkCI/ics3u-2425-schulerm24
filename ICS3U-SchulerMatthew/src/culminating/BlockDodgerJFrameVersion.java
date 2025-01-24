@@ -1,10 +1,8 @@
 package culminating;
 
-import java.awt.image.BufferedImage;
+
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
-import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
@@ -22,10 +20,14 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
 
+/**
+ * Sets the default values for the player's coordinates, player's dimensions
+ * Sets the default values for the score, score rate, score multiplier, high score
+ * Sets the starting power up type (no power up), power up end time, hazardous area end time
+ * Sets the variable names for all the sound effects and music
+ * Creates the array lists for blocks, coins, targeting blocks, power up boxes, lasers, bombs, hazardous areas
+ */
 public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, KeyListener {
 	private int baseScoreRate = 1; //set score increment
 	private double scoreMultiplier = 1.0; //multiply score by +1 per second when powerup is active
@@ -64,47 +66,26 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
 	private boolean showCoinMessage = false; // Whether to show the coin message
 	private long coinMessageEndTime = 0; // When to stop showing the coin message
 	private Clip coin;
+	private Clip newHighScore;
 	private int baseresize = 1; // player resize
-
-
-    // Load high score
-    public int loadHighScore() { // loads highscore (isn't working but dont delete)
-        try (BufferedReader reader = new BufferedReader(new FileReader("highscore.txt"))) {
-            return Integer.parseInt(reader.readLine());
-        } catch (IOException | NumberFormatException e) {
-            e.printStackTrace();
-            return 0; // Default value if there's an error
-        }
-    }
-
-    // Save high score
-    public void saveHighScore(int highScore) { // isn't working but don't delete
-        try (FileWriter writer = new FileWriter("highscore.txt")) {
-            writer.write(String.valueOf(highScore));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Save and load game
-    private int highScore;
-
-    public void saveGame() {
-        saveHighScore(highScore1);
-    }
-
-    public void loadGame() {
-        highScore1 = loadHighScore();
-    }
-
-    
-
-    // Constructor
+	
+    /**
+     * sets the game speed
+     * defines the array type for blocks, targeting blocks, power up boxes, lasers, bombs, hazardous areas, and coins
+     * sets the game speed using timer
+     * adds the key listener and sets it to always focus
+     * uploads the audios and sound effects
+     * 
+     */
     public BlockDodgerJFrameVersion() {
     	
     	    // Add mouse motion listener
     	    addMouseMotionListener(new MouseAdapter() {
     	        @Override
+    	        /**
+    	         * adds the mouse motion lister and makes the player cube follow the mouse along the x axis
+    	         * @param e is the coordinates of the mouse
+    	         */
     	        public void mouseMoved(MouseEvent e) {
     	            if (inGame) {
     	                playerX = e.getX() - playerWidth / 2; // set middle of player to mouse x coord
@@ -118,6 +99,9 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
     	    targetingBlocks = new ArrayList<>(); // spawn target blocks
     	    powerUps = new ArrayList<>(); // spawn power up blocks
     	    lasers = new ArrayList<>(); // spawn lasers when shot
+    	    bombs = new ArrayList<>(); // bombs
+    	    hazardousAreas = new ArrayList<>(); // hazardous areas
+    	    coins = new ArrayList<>(); // coins
     	    random = new Random(); // random number generator for block spawning
     	    addKeyListener(this);
     	    setFocusable(true);
@@ -157,14 +141,17 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
     	        e1.printStackTrace();
     	    }
 
-    	    bombs = new ArrayList<>();
-    	    hazardousAreas = new ArrayList<>();
-    	    coins = new ArrayList<>();
     }
 
     
 
     @Override
+   
+    /**
+     * makes the graphics for the coins, blocks, bombs, hazardous areas, target blocks, power up boxes, lasers
+     * creates the score, high score, and power up type text displays
+     * @param g is the graphics from the JFrame
+     */
     public void paintComponent(Graphics g) {
 
 
@@ -178,7 +165,7 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
 			g.setFont(new Font("Arial", Font.BOLD, baseresize * 20));
 			if (showCoinMessage) {
 				g.setColor(Color.GREEN); // coin pickup message
-				g.drawString("Score: " + score + " +500", baseresize * 10, baseresize * 20); // Adjust the position as needed
+				g.drawString("Score: " + score + " +500", baseresize * 10, baseresize * 40); // Adjust the position as needed
 			}
 			g.setColor(Color.BLUE); // player
 			g.fillRect(baseresize * playerX, baseresize * playerY, baseresize * playerWidth, baseresize * playerHeight);
@@ -208,7 +195,11 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
 			}
 			g.setColor(Color.BLACK);
 			g.setFont(new Font("Arial", Font.BOLD, baseresize * 20));
-			g.drawString("Score: " + score, baseresize * 10, baseresize * 20);
+			g.drawString("Score: " + score, baseresize * 10, baseresize * 40);
+			if (highScore1 < score) {
+				highScore1 = score;
+			}
+			g.drawString("High Score: " + highScore1, baseresize * 10, baseresize * 20);
 			if (powerUpEndTime > System.currentTimeMillis()) {
 				String powerUpName = "";
 				switch (powerUpType) {
@@ -228,16 +219,17 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
 					powerUpName = "Laser"; // laser power up
 					break;
 				}
-				g.drawString("Power-Up: " + powerUpName, baseresize * 10, baseresize * 50);
+				g.drawString("Power-Up: " + powerUpName, baseresize * 10, baseresize * 60);
 			}
 		} else {
 			showTitleScreen(g);
 		}
     }
-
+    /**
+     * stops the music playing in game, waits 2 seconds, draws the title screen
+     * @param g is the graphics from the JFrame
+     */
     private void showTitleScreen(Graphics g) {
-
-
 		intro.stop();
 		theme.stop();
 		slomosong.stop();
@@ -267,9 +259,14 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
     }
 
     @Override
+    /**
+     * handles the spawning, removing, and detection of the blocks, targeting blocks, power up boxes, coins, lasers, bombs, and hazardous areas
+     * detects when any of them hits the player
+     * plays the music when the player picks up a coin, gets killed, and when bombs drop
+     * 
+     * @param e is the actions from the JFrame
+     */
     public void actionPerformed(ActionEvent e) {
-
-
 		if (inGame) { // if player is in a game
 			score += 1 + baseScoreRate * scoreMultiplier; // score increase rate
 			if (random.nextInt(1000) == 1) {
@@ -281,6 +278,7 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
 				if (coin.y > 600) {
 					coinsToRemove.add(coin);
 				} else if (coin.intersects(new Rectangle(baseresize * playerX, baseresize * playerY, baseresize * playerWidth, baseresize * playerHeight))) {
+					powerUpEndTime += 5000;
 					coinnoise.setMicrosecondPosition(0); // set clip to beginning
 					coinnoise.loop(Clip.LOOP_CONTINUOUSLY);
 					score += 500; // Add points for collecting a coin
@@ -303,6 +301,7 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
 			if (score >= 12500) { // allow bombs to spawn if score is greater than 12500
 				if (random.nextInt(300) <= score/15000) {
 					bombs.add(new Rectangle(random.nextInt(baseresize * 530), baseresize * 0, baseresize * 30, baseresize * 30));
+					coinnoise.setMicrosecondPosition(0);
 					bombdrop.loop(Clip.LOOP_CONTINUOUSLY);
 				}
 				List<Rectangle> bombRemove = new ArrayList<>();
@@ -491,15 +490,28 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
 				slomosong.stop();
 				theme.loop(Clip.LOOP_CONTINUOUSLY);
 			}
+			
+			
+			
 			repaint();
 		}
     }
 
+    /**
+     * creates the hazardous area when a bomb hits the ground
+     * sets the time at which the hazardous area will be removed
+     * @param bomb is the bomb spawned in the action performed
+     */
     private void explodeBomb(Rectangle bomb) { // explode bombs
 		hazardousAreas.add(new Rectangle((baseresize * bomb.x) - (baseresize * 20), baseresize * bomb.y - (baseresize * 20), baseresize * 70, baseresize * 70));
 		hazardousAreaEndTime = System.currentTimeMillis() + 2500; // Hazardous area lasts for 5 seconds
     }
 
+    /**
+     * randomly selects the power up for the player to receive upon collecting a power up box
+     * plays the corresponding music for the power up and stops the music from the previous power up and game music
+     * changes the player's size, score, and abilities based on the power up
+     */
     private void activatePowerUp() {
 
 
@@ -541,8 +553,13 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
     }
 
     @Override
+    /**
+     * detects when the player presses enter or space
+     * shoots a laser if the player has the laser power up and presses space
+     * starts the game if the player is on the title screen and presses enter 
+     * @param e is the key detector from the JFrame
+     */
     public void keyPressed(KeyEvent e) {
-
 
 		Clip lasersfx = null;
 		try {
@@ -596,6 +613,14 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
 		}
     }
 
+    /**
+     * starts the game
+     * stops the death and bomb drop sound effects
+     * resets the player's size, coordinates, score, power up and the power up end time
+     * clears all blocks from previous game
+     * starts the background music
+     * starts the timer
+     */
     private void startGame() { // resets everything on game start
 		inGame = true;
 		death.stop();
@@ -618,6 +643,12 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
 		repaint();
     }
 
+    /**
+     * creates the JFrame and titles it "Block Dodger"
+     * sets the JFrame size, makes it visibld, disables resizing
+     * exits the program when the JFrame is closed
+     * @param args is the array of strings of Java string class
+     */
     public static void main(String[] args) { // game panel size and other stuff
 		JFrame frame = new JFrame("Block Dodger");
 		BlockDodgerJFrameVersion game = new BlockDodgerJFrameVersion();
@@ -629,14 +660,8 @@ public class BlockDodgerJFrameVersion extends JPanel implements ActionListener, 
     }
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyTyped(KeyEvent e) {}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyReleased(KeyEvent e) {}
 }
